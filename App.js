@@ -10,6 +10,10 @@ import SignIn from "./screens/SignIn";
 import ContextWrapper from "./context/ContextWrapper";
 import Context from "./context/Context";
 import Profile from "./screens/Profile";
+import Chats from "./screens/Chats";
+import Photo from "./screens/Photo";
+import {Ionicons} from "@expo/vector-icons";
+import Contacts from "./screens/Contacts";
 
 LogBox.ignoreLogs([
   "Setting a timer",
@@ -62,6 +66,10 @@ function App() {
           options={{title: "Whatsapp"}} 
           component={Home} 
          />
+         <Stack.Screen name="contacts"
+          options={{title: "Select Contacts"}}
+          component={Contacts}
+         />
        </Stack.Navigator>
      )}
    </NavigationContainer>
@@ -69,7 +77,40 @@ function App() {
 }
 
 function Home() {
-  return <Text>Hi</Text>
+  const {theme: {colors}} = useContext(Context)
+  return <Tab.Navigator
+    screenOptions={({route}) => {
+      return {
+        tabBarLabel: () => {
+          if(route.name === 'photo') {
+            return <Ionicons name="camera" size={20} color={colors.white} />
+          } else {
+            return <Text style={{color: colors.white}}>{route.name.toLocaleUpperCase()}</Text>
+          }
+        },
+        tabBarShowIcon: true,
+        tabBarLabelStyle: {
+          color: colors.white
+        },
+        tabBarIndicatorStyle: {
+          backgroundColor: colors.white
+        },
+        tabBarStyle: {
+          backgroundColor: colors.foreground
+        }
+      }
+    }}
+    initialRouteName="chats"
+  >
+    <Tab.Screen 
+      name="photo"
+      component={Photo}
+    />
+     <Tab.Screen 
+      name="chats"
+      component={Chats}
+    />
+  </Tab.Navigator>
 }
 
 function Main() {
