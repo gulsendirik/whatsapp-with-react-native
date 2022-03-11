@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Whatsapp",
-    "slug": "Whatsapp",
+    "name": "whatsapp-with-react-native",
+    "slug": "whatsapp-with-react-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
